@@ -278,9 +278,9 @@
       var data = {};
       new FormData(form).forEach(function (v, k) { data[k] = v; });
       if (statusEl) { statusEl.textContent = "Sending..."; statusEl.className = "form-status"; }
-      fetch("/", {
+      fetch(form.action, {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        headers: { "Content-Type": "application/x-www-form-urlencoded", "Accept": "application/json" },
         body: encode(data)
       }).then(function (r) {
         if (!r.ok) throw new Error("network");

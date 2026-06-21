@@ -115,10 +115,9 @@
 
             <div class="capture" id="capture">
               <p>Want the full written version with quick wins and a 90 day playbook? I will send it over, free.</p>
-              <form id="captureForm" name="scorecard" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                <input type="hidden" name="form-name" value="scorecard" />
-                <input type="hidden" name="score" id="scoreField" value="" />
-                <p hidden><label>Skip this <input name="bot-field" /></label></p>
+              <form id="captureForm" method="POST" action="https://formspree.io/f/mwvzowbe">
+  <input type="hidden" name="score" id="scoreField" value="" />
+  <input type="hidden" name="form-type" value="scorecard" />
                 <div class="capture__row">
                   <input type="email" name="email" placeholder="you@organisation.com" required aria-label="Your email" />
                   <button class="btn btn--primary" type="submit">Send my audit</button>
@@ -138,7 +137,7 @@
         <div class="reveal">
           <p class="eyebrow">Background</p>
           <h2>The short version of <em>how I got here.</em></h2>
-          <p style="margin-top:1.5rem">I interned with PATA, the only candidate selected from north India that cycle. The CEO Noor Ahmed Hamid posted publicly about our work together.</p>
+          <p style="margin-top:1.5rem">I interned with PATA, the only candidate selected from north India that cycle. The CEO Noor Ahmad Hamid posted about our interaction at an industry event in Delhi.</p>
           <p>I then became the first Indian intern at ATTA. They extended my three month role to eleven months because the output spoke for itself.</p>
           <p>Today I work with the World Food Travel Association, Druk Asia, and Kipling India, running content, email, newsletters, and digital strategy for tourism organisations who need real hands, not another deck.</p>
 
@@ -148,7 +147,7 @@
               <div>
                 <div class="tl__yr">Inside PATA</div>
                 <h4>The only candidate from north India</h4>
-                <p>Selected for the internship, with the work mentioned publicly by the association CEO.</p>
+                <p>Selected for the internship. Met the CEO at an event in Delhi, who posted about our interaction.</p>
               </div>
             </div>
             <div class="tl reveal">
@@ -299,9 +298,8 @@
         <p>Send a message below, or reach me on any channel. I read everything myself and reply within 24 hours.</p>
       </div>
       <div class="contact-grid">
-        <form class="reveal" id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="contact" />
-          <p hidden><label>Skip this <input name="bot-field" /></label></p>
+        <form class="reveal" id="contactForm" method="POST" action="https://formspree.io/f/mwvzowbe">
+
           <div class="field"><label for="cName">Your name</label><input id="cName" name="name" type="text" required /></div>
           <div class="field"><label for="cOrg">Organisation</label><input id="cOrg" name="organisation" type="text" /></div>
           <div class="field"><label for="cEmail">Email</label><input id="cEmail" name="email" type="email" required /></div>
@@ -379,9 +377,8 @@
       <p class="eyebrow">Before you go</p>
       <h3>Get a free written audit.</h3>
       <p>Drop your email and I will send back a six to ten page audit of your digital presence with quick wins and a 90 day playbook. No upsell, ever.</p>
-      <form class="popup__row" id="popupForm" name="audit-request" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="audit-request" />
-        <p hidden><label>Skip this <input name="bot-field" /></label></p>
+      <form class="popup__row" id="popupForm" method="POST" action="https://formspree.io/f/mwvzowbe">
+  <input type="hidden" name="form-type" value="audit-request" />
         <input type="email" name="email" placeholder="you@organisation.com" required aria-label="Your email" />
         <button class="btn btn--primary" type="submit">Send it</button>
       </form>
