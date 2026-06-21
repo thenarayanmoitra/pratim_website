@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pratim Narayan Moitra, Tourism Marketing Consultant</title>
+  <meta name="description" content="Tourism marketing consultant. PATA and ATTA trained. Working with WFTA, Druk Asia, Kipling India. Remote, affordable. Free audit available." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Pratim N. Moitra, Tourism Marketing Consultant" />
+  <meta property="og:description" content="Tourism marketing help, without the agency price tag. PATA and ATTA trained. Free audit available." />
+  <meta property="og:image" content="https://pratimnarayan.com/og-image.png" />
+  <meta property="og:url" content="https://pratimnarayan.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pratim N. Moitra, Tourism Marketing Consultant" />
+  <meta name="twitter:description" content="Tourism marketing help, without the agency price tag. PATA and ATTA trained." />
+  <meta name="twitter:image" content="https://pratimnarayan.com/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+
+  <!-- GA4: replace G-XXXXXXXXXX with your real Measurement ID before going live -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div id="progress"></div>
+
+  <!-- ===== NAV ===== -->
+  <header class="nav">
+    <div class="wrap nav__inner">
+      <a class="brand" href="index.html">pratim <em>n.</em> moitra</a>
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">&#9776;</button>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#background">about</a></li>
+        <li><a href="#audit-tool">the audit</a></li>
+        <li><a href="#services">services</a></li>
+        <li><a href="work.html">work</a></li>
+        <li><a href="#thinking">thinking</a></li>
+        <li><a class="nav__cta" href="#contact">free audit &#8594;</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="wrap hero__inner reveal">
+      <p class="eyebrow">Tourism marketing consultant, remote</p>
+      <h1>Marketing help for tourism associations, hotels, and travel brands, <em>without the agency price tag.</em></h1>
+      <p class="lead">I am Pratim. I trained inside PATA and ATTA. I now work with WFTA, Druk Asia, and Kipling India on the digital work most teams do not have time for.</p>
+      <div class="hero__cluster">
+        <a class="btn btn--primary" href="#audit-tool">Score your brand in 60 seconds</a>
+        <a class="btn btn--ghost" href="#contact">Book a call</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat__num"><span data-count="11">0</span><small>mo</small></div>
+          <p class="stat__label">ATTA internship, extended from three months because of the output</p>
+        </div>
+        <div class="stat">
+          <div class="stat__num"><span data-count="3">0</span></div>
+          <p class="stat__label">Active clients. WFTA, Druk Asia, and Kipling India</p>
+        </div>
+        <div class="stat">
+          <div class="stat__num"><span data-count="2">0</span></div>
+          <p class="stat__label">Associations I trained inside, PATA and ATTA</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TICKER ===== -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      <span class="ticker__item">PATA</span><span class="ticker__item">ATTA</span><span class="ticker__item">WFTA</span><span class="ticker__item">Druk Asia</span><span class="ticker__item">Kipling India</span><span class="ticker__item">Social media</span><span class="ticker__item">Email marketing</span><span class="ticker__item">Member newsletters</span><span class="ticker__item">Digital audits</span><span class="ticker__item">Content strategy</span>
+      <span class="ticker__item">PATA</span><span class="ticker__item">ATTA</span><span class="ticker__item">WFTA</span><span class="ticker__item">Druk Asia</span><span class="ticker__item">Kipling India</span><span class="ticker__item">Social media</span><span class="ticker__item">Email marketing</span><span class="ticker__item">Member newsletters</span><span class="ticker__item">Digital audits</span><span class="ticker__item">Content strategy</span>
+    </div>
+  </div>
+
+  <!-- ===== SIGNATURE: 60 SECOND AUDIT ===== -->
+  <section class="diag section" id="audit-tool">
+    <div class="wrap">
+      <div class="head reveal" id="diag">
+        <p class="eyebrow">Try it now</p>
+        <h2>A 60 second read on your <em>digital presence.</em></h2>
+        <p>Answer six quick questions. Watch your scorecard build in real time across the same areas my full audits cover. No email needed to see your result.</p>
+      </div>
+
+      <div class="diag__panel reveal">
+        <div class="diag__stage" id="diagStage"><!-- questions render here --></div>
+
+        <div class="score">
+          <div class="score__title">Live scorecard</div>
+          <div id="scoreRows"></div>
+          <div class="score__result" id="scoreResult">
+            <div style="display:none">
+              <div class="score__grade" id="scoreGrade"></div>
+              <p class="score__note" id="scoreNote"></p>
+            </div>
+            <p class="score__placeholder">Answer the questions and your scorecard fills in here, one area at a time.</p>
+
+            <div class="capture" id="capture">
+              <p>Want the full written version with quick wins and a 90 day playbook? I will send it over, free.</p>
+              <form id="captureForm" name="scorecard" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="scorecard" />
+                <input type="hidden" name="score" id="scoreField" value="" />
+                <p hidden><label>Skip this <input name="bot-field" /></label></p>
+                <div class="capture__row">
+                  <input type="email" name="email" placeholder="you@organisation.com" required aria-label="Your email" />
+                  <button class="btn btn--primary" type="submit">Send my audit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STORY ===== -->
+  <section class="section" id="background">
+    <div class="wrap">
+      <div class="story">
+        <div class="reveal">
+          <p class="eyebrow">Background</p>
+          <h2>The short version of <em>how I got here.</em></h2>
+          <p style="margin-top:1.5rem">I interned with PATA, the only candidate selected from north India that cycle. The CEO Noor Ahmed Hamid posted publicly about our work together.</p>
+          <p>I then became the first Indian intern at ATTA. They extended my three month role to eleven months because the output spoke for itself.</p>
+          <p>Today I work with the World Food Travel Association, Druk Asia, and Kipling India, running content, email, newsletters, and digital strategy for tourism organisations who need real hands, not another deck.</p>
+
+          <div class="timeline">
+            <div class="tl reveal">
+              <div class="tl__dot"></div>
+              <div>
+                <div class="tl__yr">Inside PATA</div>
+                <h4>The only candidate from north India</h4>
+                <p>Selected for the internship, with the work mentioned publicly by the association CEO.</p>
+              </div>
+            </div>
+            <div class="tl reveal">
+              <div class="tl__dot"></div>
+              <div>
+                <div class="tl__yr">Inside ATTA</div>
+                <h4>First Indian intern, eleven months</h4>
+                <p>A three month role that kept getting extended because the output earned it.</p>
+              </div>
+            </div>
+            <div class="tl reveal">
+              <div class="tl__dot"></div>
+              <div>
+                <div class="tl__yr">Independent</div>
+                <h4>Consulting for travel brands</h4>
+                <p>Now running content, email, and audits for WFTA, Druk Asia, and Kipling India.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="facts reveal">
+          <div class="fact"><div class="k">Education</div><div class="v">Master's in Tourism Management, Bachelor's in Marketing</div></div>
+          <div class="fact"><div class="k">Internships</div><div class="v">PATA, and ATTA as first Indian intern over eleven months</div></div>
+          <div class="fact"><div class="k">Current clients</div><div class="v">WFTA, Druk Asia, Kipling India</div></div>
+          <div class="fact"><div class="k">Based in</div><div class="v">India, works worldwide on IST</div></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section class="section section--tint" id="services">
+    <div class="wrap">
+      <div class="head head--wide reveal">
+        <p class="eyebrow">Services</p>
+        <h2>Pretty much everything online, <em>done quietly.</em></h2>
+        <p>No retainers you cannot escape. No jargon. Tap any card to see what it covers, then pick what you need.</p>
+      </div>
+
+      <div class="svc-grid">
+        <article class="svc reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="svc__top"><span class="svc__no">01</span><h3>Social media</h3><span class="svc__plus">+</span></div>
+          <div class="svc__body"><div><p>Strategy, calendars, content production, and community management in a tourism native voice.</p></div></div>
+        </article>
+        <article class="svc reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="svc__top"><span class="svc__no">02</span><h3>Email marketing</h3><span class="svc__plus">+</span></div>
+          <div class="svc__body"><div><p>Setup, segmentation, automations, and member campaigns built to actually get opened.</p></div></div>
+        </article>
+        <article class="svc reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="svc__top"><span class="svc__no">03</span><h3>Member newsletters</h3><span class="svc__plus">+</span></div>
+          <div class="svc__body"><div><p>Editorial planning through to send. The kind of newsletter members forward to a colleague.</p></div></div>
+        </article>
+        <article class="svc reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="svc__top"><span class="svc__no">04</span><h3>Website management</h3><span class="svc__plus">+</span></div>
+          <div class="svc__body"><div><p>Updates, content, light redesigns, SEO hygiene, and day to day CMS handling.</p></div></div>
+        </article>
+        <article class="svc reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="svc__top"><span class="svc__no">05</span><h3>Digital audits</h3><span class="svc__plus">+</span></div>
+          <div class="svc__body"><div><p>A full written audit with a 90 day playbook. The first one is always free.</p></div></div>
+        </article>
+        <article class="svc reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="svc__top"><span class="svc__no">06</span><h3>Whatever else</h3><span class="svc__plus">+</span></div>
+          <div class="svc__body"><div><p>Event promo, partner outreach, sponsorship decks, and onboarding flows.</p></div></div>
+        </article>
+      </div>
+      <p class="svc-note reveal">Available for <b>pilot projects, part time consulting, full time, or paid internships.</b> I am not expensive.</p>
+    </div>
+  </section>
+
+  <!-- ===== FREE AUDIT ===== -->
+  <section class="section" id="audit">
+    <div class="wrap audit-grid">
+      <div class="reveal">
+        <p class="eyebrow">Free audit</p>
+        <h2>Want a full audit before <em>deciding anything?</em></h2>
+        <p class="lead" style="margin-top:1.2rem">Send me your website, socials, and newsletter. I send back a six to ten page audit with quick wins and a 90 day playbook. Free. No upsell. If it is useful, we talk. If it is not, you keep the playbook.</p>
+        <ul class="checklist">
+          <li>Website and SEO hygiene</li>
+          <li>Social channels and posting cadence</li>
+          <li>Email and newsletter setup</li>
+          <li>Member or guest journey gaps</li>
+          <li>Three quick wins to ship this month</li>
+          <li>A 90 day playbook to follow after</li>
+        </ul>
+      </div>
+      <div class="audit-card reveal">
+        <p class="eyebrow">What you walk away with</p>
+        <h3>A playbook you keep, either way.</h3>
+        <p>Most prospects read the audit and use it themselves. That is fine. If the analysis earns your trust, we talk about doing the work together. There is never a hard sell.</p>
+        <a class="btn btn--primary btn--block" href="#contact" style="margin-top:1.2rem">Request your audit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WORK ===== -->
+  <section class="section section--tint">
+    <div class="wrap">
+      <div class="head head--wide reveal">
+        <p class="eyebrow">Selected work</p>
+        <h2>Real engagements, and pitches for <em>where I would love to work next.</em></h2>
+        <p>A preview of recent client work. Each case study lives on Notion. Short, honest, easy to read.</p>
+      </div>
+      <div class="cards">
+        <a class="card reveal" href="https://www.notion.so/How-I-migrated-WFTA-s-academy-site-off-LearnWorlds-367a6af1fb0a80b29c35df4d0bb96bc0?source=copy_link" target="_blank" rel="noopener">
+          <span class="card__tag">WFTA</span>
+          <h3>How I migrated WFTA's academy site off LearnWorlds</h3>
+          <p>Site migration, information architecture, content reorganisation, and the handover playbook the in house team uses today.</p>
+          <span class="card__go">Read on Notion &#8594;</span>
+        </a>
+        <a class="card reveal" href="https://www.notion.so/How-I-built-Kipling-India-s-digital-setup-from-scratch-367a6af1fb0a809fa0cec73282a55619?source=copy_link" target="_blank" rel="noopener">
+          <span class="card__tag">Kipling India</span>
+          <h3>How I built Kipling India's digital setup from scratch</h3>
+          <p>Website, social channels, email, and the operational stack that ties them together, designed for a small team to run after handoff.</p>
+          <span class="card__go">Read on Notion &#8594;</span>
+        </a>
+        <a class="card card--soft reveal" href="work.html">
+          <span class="card__tag">PATA, ATTA, pitches</span>
+          <h3>See every case study in full</h3>
+          <p>Real engagements with PATA and ATTA, plus hypothetical pitches for ACTOUR, USTOA, Tourism Alliance, and more.</p>
+          <span class="card__go">View all work &#8594;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== THINKING ===== -->
+  <section class="section" id="thinking">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">Thinking</p>
+        <h2>A point of view, <em>not a pitch.</em></h2>
+      </div>
+      <blockquote class="quote reveal">Indian tourism keeps marketing destinations. The brands that win the next decade will market <em>traveller transformations</em>, what changes about the person who comes home.</blockquote>
+      <div class="reveal" style="max-width:62ch">
+        <p>The infrastructure conversation has matured. The marketing conversation has not. We pitch palaces, beaches, and Himalayas the same way we did in 2008, while the actual traveller is a 31 year old who books on Instagram, reads on Substack, and trusts no brochure.</p>
+        <p>The brands building real loyalty now are not selling destinations. They are selling who you become when you come home. Calmer, braver, better read, better fed. That is the unit of decision making for the modern traveller, and almost no one in Indian tourism is marketing to it yet.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="section section--tint" id="contact">
+    <div class="wrap">
+      <div class="head head--wide reveal">
+        <p class="eyebrow">Contact</p>
+        <h2>Tell me about your <em>organisation.</em></h2>
+        <p>Send a message below, or reach me on any channel. I read everything myself and reply within 24 hours.</p>
+      </div>
+      <div class="contact-grid">
+        <form class="reveal" id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contact" />
+          <p hidden><label>Skip this <input name="bot-field" /></label></p>
+          <div class="field"><label for="cName">Your name</label><input id="cName" name="name" type="text" required /></div>
+          <div class="field"><label for="cOrg">Organisation</label><input id="cOrg" name="organisation" type="text" /></div>
+          <div class="field"><label for="cEmail">Email</label><input id="cEmail" name="email" type="email" required /></div>
+          <div class="field">
+            <label for="cWant">What are you looking for?</label>
+            <select id="cWant" name="looking_for">
+              <option>Free audit</option>
+              <option>Pilot project</option>
+              <option>Part time consulting</option>
+              <option>Full time or internship</option>
+              <option>Just exploring</option>
+            </select>
+          </div>
+          <div class="field"><label for="cMsg">A few words on what you need</label><textarea id="cMsg" name="message" required></textarea></div>
+          <button class="btn btn--primary" type="submit">Send it across &#8594;</button>
+          <p class="form-status" id="contactStatus" role="status" aria-live="polite"></p>
+        </form>
+
+        <aside class="contact-aside reveal">
+          <div class="fact"><div class="k">Email</div><div class="v"><a href="mailto:pratimxnarayan@gmail.com">pratimxnarayan@gmail.com</a></div></div>
+          <div class="fact"><div class="k">LinkedIn</div><div class="v"><a href="https://linkedin.com/in/pratimnarayan" target="_blank" rel="noopener">linkedin.com/in/pratimnarayan</a></div></div>
+          <div class="fact"><div class="k">Open to</div><div class="v">Pilots, part time, full time, and paid internships</div></div>
+          <div class="fact"><div class="k">Based in</div><div class="v">India, works worldwide on IST</div></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand">pratim <em>n.</em> moitra</div>
+          <p style="margin-top:.6rem; max-width:30ch; color:rgba(250,246,239,.6)">Tourism marketing help for associations, hotels, and travel brands. Remote, affordable, real hands.</p>
+        </div>
+        <div>
+          <div class="k">Navigate</div>
+          <p><a href="#background">About</a></p>
+          <p><a href="#services">Services</a></p>
+          <p><a href="work.html">Work</a></p>
+          <p><a href="#thinking">Thinking</a></p>
+        </div>
+        <div>
+          <div class="k">Contact</div>
+          <p><a href="mailto:pratimxnarayan@gmail.com">Email</a></p>
+          <p><a href="https://linkedin.com/in/pratimnarayan" target="_blank" rel="noopener">LinkedIn</a></p>
+          <p><a href="#audit">Free audit</a></p>
+        </div>
+        <div>
+          <div class="k">Open to</div>
+          <p>Pilots</p>
+          <p>Part time</p>
+          <p>Full time</p>
+          <p>Paid internships</p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>&copy; <span id="yr">2025</span> Pratim Narayan Moitra, Tourism marketing consultant</span>
+        <span class="footer__coords">28.6&deg; N, 77.2&deg; E</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== STICKY PILL + BACK TO TOP ===== -->
+  <a class="pill" id="pill" href="#audit-tool"><span class="pill__dot"></span> Score your brand, free</a>
+  <button class="totop" id="totop" aria-label="Back to top">&#8593;</button>
+
+  <!-- ===== POPUP ===== -->
+  <div class="popup" id="popup" role="dialog" aria-modal="true" aria-label="Free audit offer">
+    <div class="popup__card">
+      <button class="popup__close" id="popupClose" aria-label="Close">&times;</button>
+      <p class="eyebrow">Before you go</p>
+      <h3>Get a free written audit.</h3>
+      <p>Drop your email and I will send back a six to ten page audit of your digital presence with quick wins and a 90 day playbook. No upsell, ever.</p>
+      <form class="popup__row" id="popupForm" name="audit-request" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="audit-request" />
+        <p hidden><label>Skip this <input name="bot-field" /></label></p>
+        <input type="email" name="email" placeholder="you@organisation.com" required aria-label="Your email" />
+        <button class="btn btn--primary" type="submit">Send it</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/main.js"></script>
+</body>
+</html>
