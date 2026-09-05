@@ -2,14 +2,16 @@
   publish = "."
 
 # Old single page URLs, kept alive so nothing that was ever shared breaks.
+# Targets carry the trailing slash so these land in one hop rather than
+# redirecting into Netlify's own bare-to-slash redirect.
 [[redirects]]
   from = "/work.html"
-  to = "/work"
+  to = "/work/"
   status = 301
 
 [[redirects]]
   from = "/privacy.html"
-  to = "/privacy"
+  to = "/privacy/"
   status = 301
 
 [[redirects]]

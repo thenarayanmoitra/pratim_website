@@ -226,43 +226,137 @@ h1 em,h2 em,h3 em{font-style:normal;font-weight:700;color:var(--terracotta-deep)
 .fact .v a{color:var(--terracotta-deep);text-decoration:none}
 .fact .v a:hover{text-decoration:underline}
 
-/* ---------- journey (how it works) ---------- */
-.journey{position:relative;max-width:760px;margin:0 auto}
-.journey::before{
-  content:"";position:absolute;left:9px;top:8px;bottom:8px;width:1px;
-  background:var(--hairline);
+/* ---------- journey (how it works) ----------
+   Four numbered stops on one rail. Horizontal on desktop so the whole
+   path is legible at a glance, vertical below 900 where four across
+   would crush the copy.
+
+   The rail is drawn per stop rather than as one element spanning the
+   container, because a single element has no way of knowing where the
+   last dot sits and always overshoots it. Each stop carries its own
+   segment to the next one, the last carries none, and the segments
+   fill in sequence once .drawn lands from main.js. */
+.journey{position:relative;padding-top:.25rem;--jgap:2.4rem;--jdot:58px}
+.journey__stops{
+  list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:var(--jgap);
 }
-.journey__line{
-  position:absolute;left:9px;top:8px;width:1px;height:0;
-  background:var(--terracotta);transition:height 1.6s var(--ease);
+
+.stop{position:relative;padding:0}
+/* ::after is the unfilled rail, ::before the terracotta fill over it */
+.stop::after,.stop::before{
+  content:"";position:absolute;pointer-events:none;
+  left:var(--jdot);right:calc(-1 * var(--jgap));
+  top:calc(var(--jdot) / 2);height:1px;
 }
-.journey.drawn .journey__line{height:calc(100% - 16px)}
-.stop{position:relative;padding:0 0 3.2rem 3.4rem}
-.stop:last-child{padding-bottom:0}
+.stop::after{background:var(--hairline)}
+.stop::before{
+  z-index:1;background:var(--terracotta);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .55s var(--ease);
+}
+.journey.drawn .stop::before{transform:scaleX(1)}
+.journey.drawn .stop:nth-child(2)::before{transition-delay:.4s}
+.journey.drawn .stop:nth-child(3)::before{transition-delay:.8s}
+.journey.drawn .stop:nth-child(4)::before{transition-delay:1.2s}
+.stop:last-child::after,.stop:last-child::before{display:none}
+
 .stop__dot{
-  position:absolute;left:0;top:8px;width:19px;height:19px;border-radius:50%;
+  position:relative;z-index:2;
+  width:var(--jdot);height:var(--jdot);border-radius:50%;
   background:var(--cream);border:1px solid var(--terracotta);
-  display:flex;align-items:center;justify-content:center;
+  display:grid;place-items:center;
+  margin-bottom:1.5rem;
+  transition:background .4s var(--ease),border-color .4s var(--ease),transform .4s var(--ease);
 }
 .section--tint .stop__dot{background:var(--cream-deep)}
-.stop__dot::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--terracotta)}
-.stop h3{margin-bottom:.6rem}
-.stop p{color:var(--ink-mid);max-width:54ch}
+.stop__n{
+  font-family:'Space Mono',monospace;font-size:.82rem;letter-spacing:.06em;
+  color:var(--terracotta-deep);line-height:1;transition:color .4s var(--ease);
+}
+.stop:hover .stop__dot{background:var(--espresso);border-color:var(--espresso);transform:translateY(-3px)}
+.stop:hover .stop__n{color:var(--terracotta-soft)}
+/* the end of the path, filled, so the rail reads as arriving somewhere */
+.stop:last-child .stop__dot,
+.section--tint .stop:last-child .stop__dot{background:var(--espresso);border-color:var(--espresso)}
+.stop:last-child .stop__n{color:var(--terracotta-soft)}
+.stop h3{margin-bottom:.65rem;font-size:clamp(1.2rem,1.7vw,1.5rem)}
+.stop p{color:var(--ink-mid);font-size:.96rem;line-height:1.7;max-width:34ch}
 
-/* ---------- services (editorial rows) ---------- */
+@media (max-width:900px){
+  .journey{max-width:760px;margin:0 auto}
+  .journey__stops{grid-template-columns:1fr;gap:0}
+  .stop{padding:0 0 3rem 4.8rem;min-height:var(--jdot)}
+  .stop:last-child{padding-bottom:0}
+  .stop__dot{position:absolute;left:0;top:0;margin-bottom:0}
+  .stop p{max-width:54ch}
+  /* the rail turns vertical: dot bottom down to the next stop's top */
+  .stop::after,.stop::before{
+    left:calc(var(--jdot) / 2);right:auto;
+    top:var(--jdot);bottom:0;width:1px;height:auto;
+  }
+  .stop::before{transform:scaleY(0);transform-origin:top}
+  .journey.drawn .stop::before{transform:scaleY(1)}
+}
+@media (max-width:640px){
+  .journey{--jdot:48px}
+  .stop{padding:0 0 2.4rem 3.9rem}
+  .stop__n{font-size:.74rem}
+}
+
+/* ---------- services (editorial rows) ----------
+   A numbered index rather than a plain list. The whole row is the
+   link, the wash bleeds past the container edge so the hover reads
+   as a full width band, and the arrow is the only moving part. */
 .svc-list{border-top:1px solid var(--hairline)}
 .svc-row{
-  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1.3fr);
-  gap:1.5rem 4rem;padding:2.6rem 0;border-bottom:1px solid var(--hairline);
-  transition:padding-left .4s var(--ease);
+  position:relative;display:grid;
+  grid-template-columns:3.6rem minmax(0,1.15fr) minmax(0,1fr) 3.6rem;
+  gap:1rem 2.8rem;align-items:start;
+  padding:2.5rem 0;border-bottom:1px solid var(--hairline);
+  text-decoration:none;color:inherit;
 }
-.svc-row:hover{padding-left:.9rem}
-.svc-row h3{
-  font-size:clamp(1.5rem,2.6vw,2.1rem);
-  transition:color .3s;
+.svc-row::before{
+  content:"";position:absolute;top:0;bottom:0;left:-1.5rem;right:-1.5rem;
+  background:var(--cream-deep);border-radius:var(--radius);
+  opacity:0;transition:opacity .45s var(--ease);z-index:0;
 }
-.svc-row:hover h3{color:var(--terracotta-deep)}
-.svc-row p{color:var(--ink-mid);align-self:center}
+.section--tint .svc-row::before{background:var(--parchment)}
+.svc-row:hover::before{opacity:1}
+.svc-row>*{position:relative;z-index:1}
+
+.svc-row__n{
+  font-family:'Space Mono',monospace;font-size:.78rem;letter-spacing:.16em;
+  color:var(--terracotta-deep);padding-top:.7rem;
+  transition:color .35s var(--ease),transform .45s var(--ease);
+}
+.svc-row:hover .svc-row__n{transform:translateY(-2px)}
+.svc-row__title{
+  font-size:clamp(1.4rem,2.25vw,1.9rem);
+  transition:color .35s var(--ease);
+}
+.svc-row:hover .svc-row__title{color:var(--terracotta-deep)}
+.svc-row__blurb{
+  color:var(--ink-mid);align-self:start;padding-top:.35rem;
+  font-size:1rem;line-height:1.72;
+}
+.svc-row__go{
+  justify-self:end;align-self:center;
+  width:46px;height:46px;border-radius:50%;flex:none;
+  border:1px solid var(--hairline);color:var(--espresso);
+  display:grid;place-items:center;font-size:1rem;line-height:1;
+  transition:background .35s var(--ease),border-color .35s var(--ease),
+             color .35s var(--ease),transform .45s var(--ease);
+}
+.svc-row:hover .svc-row__go{
+  background:var(--espresso);border-color:var(--espresso);
+  color:var(--cream);transform:translateX(4px);
+}
+/* the label the arrow replaces, kept for screen readers */
+.svc-row__sr{
+  position:absolute;width:1px;height:1px;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;
+}
 
 /* ---------- pricing ---------- */
 .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;align-items:stretch}
@@ -490,7 +584,16 @@ h1 em,h2 em,h3 em{font-style:normal;font-weight:700;color:var(--terracotta-deep)
   .nav__cta:hover{background:none;color:var(--terracotta-deep)!important}
 }
 @media (max-width:720px){
-  .svc-row{grid-template-columns:1fr;gap:.7rem;padding:2.1rem 0}
+  .svc-row{
+    grid-template-columns:2.6rem minmax(0,1fr) 3rem;
+    grid-template-areas:"n t go" ". b b";
+    gap:.55rem 1.1rem;padding:2.1rem 0;align-items:center;
+  }
+  .svc-row__n{grid-area:n;padding-top:0}
+  .svc-row__title{grid-area:t}
+  .svc-row__blurb{grid-area:b;font-size:.95rem}
+  .svc-row__go{grid-area:go;width:40px;height:40px}
+  .svc-row::before{left:-1rem;right:-1rem}
   .checklist{columns:1}
   .hero{padding-top:8rem}
 }
@@ -516,14 +619,6 @@ h1 em,h2 em,h3 em{font-style:normal;font-weight:700;color:var(--terracotta-deep)
 }
 .creds__logo{height:26px;width:auto;filter:grayscale(1);opacity:.72}
 
-/* ---------- services, inline proof ---------- */
-.svc-body{align-self:center}
-.svc-row .svc-proof{
-  margin-top:1.1rem;padding-left:1.1rem;
-  border-left:2px solid var(--terracotta-soft);
-  font-family:'Space Mono',monospace;font-size:.78rem;line-height:1.7;
-  letter-spacing:.01em;color:var(--terracotta-deep);text-transform:none;
-}
 
 /* ---------- book a call ---------- */
 .booking{max-width:920px;margin:0 auto}

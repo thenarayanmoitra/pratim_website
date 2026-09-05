@@ -14,7 +14,11 @@ const SITE = {
   /* Bump this whenever styles.css or main.js changes. Netlify caches
      everything under /assets for a year, so without a new value the
      browsers of returning visitors keep serving the old files. */
-  assetVersion: "2026-08-30",
+  assetVersion: "2026-09-06",
+  /* Bump this only when the icon files themselves change. Browsers and
+     Google cache favicons harder than anything else on a site, so the
+     query string is the only reliable way to force a refetch. */
+  iconVersion: "2026-09-06",
   ga: "G-5T8Y684KF6",
   ogImage: "https://pratimnarayan.com/og-image.png",
   /* sameAs is what merges every scattered mention of Pratim into one
@@ -56,7 +60,7 @@ const SERVICES = [
     nav: "Websites",
     title: "Websites, built and managed",
     blurb:
-      "Fast, clear sites where every page points at an enquiry. Built from scratch or reworked, and included inside my retainers."
+      "Fast, clear sites where every page points at an enquiry. Built from scratch or reworked, and included inside the Growth retainer."
   },
   {
     slug: "digital-audits",
@@ -73,6 +77,19 @@ const SERVICES = [
       "Event campaigns, partner outreach, sponsorship decks, onboarding flows. The unglamorous work most teams never find time for."
   }
 ];
+
+/* ---------- url shape ----------
+   Netlify serves every folder at its trailing slash form and 301s the
+   bare path to it. Canonicals, the sitemap, and internal links all have
+   to agree with that, otherwise every canonical points at a redirect and
+   Google quietly drops the page. One function decides the shape. */
+function canonicalPath(p) {
+  if (p === "/") return "/";
+  return p.endsWith("/") ? p : p + "/";
+}
+function canonicalUrl(p) {
+  return SITE.origin + canonicalPath(p);
+}
 
 /* ---------- schema ---------- */
 function personSchema() {
@@ -136,36 +153,84 @@ function practiceSchema() {
   };
 }
 
-function breadcrumbSchema(trail) {
+/* The @id has to be page scoped. Every page used to publish a
+   BreadcrumbList under the same identifier, which makes the whole set
+   read as one contradictory node instead of seventeen distinct trails. */
+function breadcrumbSchema(trail, pagePath) {
   return {
     "@type": "BreadcrumbList",
-    "@id": SITE.origin + "/#breadcrumb",
+    "@id": canonicalUrl(pagePath) + "#breadcrumb",
     itemListElement: trail.map((t, i) => ({
       "@type": "ListItem",
       position: i + 1,
       name: t.name,
-      item: SITE.origin + t.href
+      item: canonicalUrl(t.href || pagePath)
+    }))
+  };
+}
+
+/* The nav, stated as data. It does not force sitelinks, nothing does,
+   but it is the one machine readable statement of what the site's
+   main sections are. */
+function siteNavSchema() {
+  return {
+    "@type": "ItemList",
+    "@id": SITE.origin + "/#sitenav",
+    name: "Main navigation",
+    itemListElement: [
+      { href: "/", label: "Home" },
+      { href: "/about", label: "About" },
+      { href: "/why-work-with-me", label: "Why work with me" },
+      { href: "/services", label: "Services" },
+      { href: "/work", label: "Work and case studies" },
+      { href: "/pricing", label: "Pricing" },
+      { href: "/audit", label: "Free audit" },
+      { href: "/contact", label: "Contact" }
+    ].map((n, i) => ({
+      "@type": "SiteNavigationElement",
+      position: i + 1,
+      name: n.label,
+      url: canonicalUrl(n.href)
     }))
   };
 }
 
 /* ---------- head ---------- */
 function head(p) {
-  const canonical = SITE.origin + p.path;
+  const canonical = canonicalUrl(p.path);
   const graph = [personSchema(), practiceSchema()];
 
-  if (p.path === "/") {
-    graph.push({
-      "@type": "WebSite",
-      "@id": SITE.origin + "/#website",
-      url: SITE.origin + "/",
-      name: "Pratim Narayan Moitra",
-      publisher: { "@id": SITE.origin + "/#pratim" },
-      inLanguage: "en"
-    });
-  }
-  if (p.breadcrumb) graph.push(breadcrumbSchema(p.breadcrumb));
-  if (p.extraSchema) p.extraSchema.forEach((s) => graph.push(s));
+  /* WebSite belongs on every page, not just home, so that each WebPage
+     below has a real node to hang isPartOf on. */
+  graph.push({
+    "@type": "WebSite",
+    "@id": SITE.origin + "/#website",
+    url: SITE.origin + "/",
+    name: "Pratim Narayan Moitra",
+    publisher: { "@id": SITE.origin + "/#pratim" },
+    inLanguage: "en"
+  });
+
+  /* One WebPage node per URL. This is what lets a crawler see seventeen
+     distinct documents under one site rather than seventeen copies of
+     the same Person and ProfessionalService blocks. */
+  const page = {
+    "@type": "WebPage",
+    "@id": canonical + "#webpage",
+    url: canonical,
+    name: p.title,
+    description: p.description,
+    isPartOf: { "@id": SITE.origin + "/#website" },
+    about: { "@id": SITE.origin + "/#pratim" },
+    primaryImageOfPage: SITE.ogImage,
+    inLanguage: "en"
+  };
+  if (p.breadcrumb) page.breadcrumb = { "@id": canonical + "#breadcrumb" };
+  graph.push(page);
+
+  if (p.path === "/") graph.push(siteNavSchema());
+  if (p.breadcrumb) graph.push(breadcrumbSchema(p.breadcrumb, p.path));
+  if (p.extraSchema) p.extraSchema.forEach((x) => graph.push(typeof x === "function" ? x(p) : x));
 
   const ld = JSON.stringify({ "@context": "https://schema.org", "@graph": graph }, null, 2);
 
@@ -190,10 +255,12 @@ function head(p) {
   <meta name="twitter:description" content="${p.description}" />
   <meta name="twitter:image" content="${SITE.ogImage}" />
 
-  <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="icon" href="/favicon.ico?v=${SITE.iconVersion}" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=${SITE.iconVersion}" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png?v=${SITE.iconVersion}" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/web-app-manifest-192x192.png?v=${SITE.iconVersion}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=${SITE.iconVersion}" />
+  <link rel="manifest" href="/site.webmanifest?v=${SITE.iconVersion}" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -428,6 +495,8 @@ function exitModal() {
 
 module.exports = {
   SITE,
+  canonicalPath,
+  canonicalUrl,
   NAV,
   SERVICES,
   head,

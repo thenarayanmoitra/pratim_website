@@ -114,7 +114,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "What if we do not like the work after month one?",
-    a: "You stop paying and keep everything I made, including the website. The trial month exists so that neither of us is trapped. So far, nobody has used the exit, but it matters that it is there."
+    a: "You stop paying and keep everything I made, the website included if you were on Growth. The trial month exists so that neither of us is trapped. So far, nobody has used the exit, but it matters that it is there."
   },
   {
     q: "Do you do everything yourself?",
@@ -152,15 +152,18 @@ ${rows}
 `;
 }
 
-const faqSchema = {
+/* Page scoped, because the same FAQ block renders on home, why work
+   with me, and pricing. Three FAQPage nodes sharing one @id read as one
+   node being described three different ways. */
+const faqSchema = (p) => ({
   "@type": "FAQPage",
-  "@id": SITE.origin + "/#faq",
+  "@id": P.canonicalUrl(p.path) + "#faq",
   mainEntity: FAQ_ITEMS.map((f) => ({
     "@type": "Question",
     name: f.q,
     acceptedAnswer: { "@type": "Answer", text: f.a }
   }))
-};
+});
 
 const AUDIT_FORM = `      <div class="audit-card reveal" data-d="1">
         <p class="eyebrow">Request yours</p>
@@ -175,29 +178,55 @@ const AUDIT_FORM = `      <div class="audit-card reveal" data-d="1">
       </div>`;
 
 const JOURNEY = `      <div class="journey">
-        <span class="journey__line" aria-hidden="true"></span>
-        <div class="stop reveal">
-          <span class="stop__dot" aria-hidden="true"></span>
-          <h3>The audit</h3>
-          <p>Send me your website and socials. I send back a free written audit with quick wins and a 90 day playbook. It is a real document you keep, whether or not we ever speak again.</p>
-        </div>
-        <div class="stop reveal">
-          <span class="stop__dot" aria-hidden="true"></span>
-          <h3>The call</h3>
-          <p>If the audit lands, we talk for thirty minutes about the one thing you most want fixed in the next ninety days. You will know by the end of the call whether I am the right person for it.</p>
-        </div>
-        <div class="stop reveal">
-          <span class="stop__dot" aria-hidden="true"></span>
-          <h3>The trial month</h3>
-          <p>We start with a single month at whichever retainer fits. Real deliverables from week one. If it does not work, you walk away and keep everything I made.</p>
-        </div>
-        <div class="stop reveal">
-          <span class="stop__dot" aria-hidden="true"></span>
-          <h3>The retainer</h3>
-          <p>If the trial earns it, we continue month to month. Prefer defined projects instead of a retainer? I also work at an hourly rate. Either way, no lock in, ever.</p>
-        </div>
+        <ol class="journey__stops">
+          <li class="stop reveal">
+            <span class="stop__dot" aria-hidden="true"><span class="stop__n">01</span></span>
+            <div class="stop__body">
+              <h3>The audit</h3>
+              <p>Send me your website and socials. I send back a free written audit with quick wins and a 90 day playbook. It is a real document you keep, whether or not we ever speak again.</p>
+            </div>
+          </li>
+          <li class="stop reveal" data-d="1">
+            <span class="stop__dot" aria-hidden="true"><span class="stop__n">02</span></span>
+            <div class="stop__body">
+              <h3>The call</h3>
+              <p>If the audit lands, we talk for thirty minutes about the one thing you most want fixed in the next ninety days. You will know by the end of the call whether I am the right person for it.</p>
+            </div>
+          </li>
+          <li class="stop reveal" data-d="2">
+            <span class="stop__dot" aria-hidden="true"><span class="stop__n">03</span></span>
+            <div class="stop__body">
+              <h3>The trial month</h3>
+              <p>We start with a single month at whichever retainer fits. Real deliverables from week one. If it does not work, you walk away and keep everything I made.</p>
+            </div>
+          </li>
+          <li class="stop reveal" data-d="3">
+            <span class="stop__dot" aria-hidden="true"><span class="stop__n">04</span></span>
+            <div class="stop__body">
+              <h3>The retainer</h3>
+              <p>If the trial earns it, we continue month to month. Prefer defined projects instead of a retainer? I also work at an hourly rate. Either way, no lock in, ever.</p>
+            </div>
+          </li>
+        </ol>
       </div>`;
 
+
+/* ------------------------------------------------------------
+   Service rows. Home and /services both render this, so the two
+   can never drift. Numbered, because five numbered things read as
+   a considered set and five unnumbered ones read as a list.
+   ------------------------------------------------------------ */
+function svcRows() {
+  return SERVICES.map(
+    (s, i) => `        <a class="svc-row reveal" href="/services/${s.slug}">
+          <span class="svc-row__n" aria-hidden="true">${String(i + 1).padStart(2, "0")}</span>
+          <h3 class="svc-row__title">${s.title}</h3>
+          <p class="svc-row__blurb">${s.blurb}</p>
+          <span class="svc-row__go" aria-hidden="true">&#8594;</span>
+          <span class="svc-row__sr">Read the full page</span>
+        </a>`
+  ).join("\n");
+}
 
 /* ============================================================
    WHY WORK WITH ME
@@ -375,16 +404,6 @@ ${P.ctaBand()}`;
 
 /* ---------- home ---------- */
 function home() {
-  const svcRows = SERVICES.map(
-    (s) => `        <a class="svc-row reveal" href="/services/${s.slug}" style="text-decoration:none">
-          <h3>${s.title}</h3>
-          <div class="svc-body">
-            <p>${s.blurb}</p>
-            <p class="svc-proof">Read the full page &#8594;</p>
-          </div>
-        </a>`
-  ).join("\n");
-
   return `  <section class="hero">
     <div class="wrap hero__inner">
       <div class="hero__copy">
@@ -455,7 +474,7 @@ ${JOURNEY}
         <p>Five things, done properly, instead of twenty done thinly. Each one has its own page.</p>
       </div>
       <div class="svc-list">
-${svcRows}
+${svcRows()}
       </div>
     </div>
   </section>
@@ -597,15 +616,7 @@ ${P.ctaBand()}`;
 
 /* ---------- services index ---------- */
 function servicesIndex() {
-  const rows = SERVICES.map(
-    (s) => `        <a class="svc-row reveal" href="/services/${s.slug}" style="text-decoration:none">
-          <h3>${s.title}</h3>
-          <div class="svc-body">
-            <p>${s.blurb}</p>
-            <p class="svc-proof">Read the full page &#8594;</p>
-          </div>
-        </a>`
-  ).join("\n");
+  const rows = svcRows();
 
   return `  <section class="pagehero">
     <div class="wrap reveal">
@@ -967,7 +978,7 @@ const CASES = {
 
         <h2>The handover</h2>
         <p>The part I am most pleased with is the least visible. The team at WFTA still run the site from the playbook I wrote. A migration that leaves an organisation dependent on the person who did it is only half finished.</p>
-        <div class="pullnote">Websites are included inside my retainers for exactly this reason. The site should not become a separate invoice every time it needs a change.</div>
+        <div class="pullnote">A website rework or full rebuild is included inside the Growth retainer for exactly this reason. The site should not become a separate invoice every time it needs a change.</div>
 
         <h2>What I took away</h2>
         <p>Most website projects in this industry are not design problems. They are structure problems wearing a design problem as a disguise. Fix what goes where, and the visual work gets much easier.</p>`
@@ -1038,26 +1049,24 @@ ${P.crumb([{ name: "Home", href: "/" }, { name: "Pricing" }])}
       <div class="price-grid">
         <div class="price reveal">
           <div class="price__tier">Presence</div>
-          <div class="price__amt">$200</div>
+          <div class="price__amt">$300</div>
           <div class="price__per">USD per month</div>
           <ul>
             <li>One static post and one video every week</li>
-            <li>Your website built from scratch, included</li>
-            <li>Domain and hosting set up for you</li>
-            <li>A short performance note every month</li>
+            <li>A short performance report every month</li>
           </ul>
           <a class="btn btn--ghost btn--block" href="/contact">Start with a trial month</a>
         </div>
         <div class="price price--feature reveal" data-d="1">
           <span class="price__badge">Most complete</span>
           <div class="price__tier">Growth</div>
-          <div class="price__amt">$400</div>
+          <div class="price__amt">$500</div>
           <div class="price__per">USD per month</div>
           <ul>
             <li>Five posts every week, four statics and one video</li>
             <li>Website rework or full rebuild, included</li>
             <li>Email and newsletter support</li>
-            <li>Monthly reporting and a quarterly plan</li>
+            <li>Monthly reporting plan</li>
           </ul>
           <a class="btn btn--light btn--block" href="/contact">Start with a trial month</a>
         </div>
@@ -1074,7 +1083,7 @@ ${P.crumb([{ name: "Home", href: "/" }, { name: "Pricing" }])}
           <a class="btn btn--ghost btn--block" href="/contact">Scope a project</a>
         </div>
       </div>
-      <p class="price-note reveal">Every retainer begins with a trial month. Every month after is yours to cancel. You keep everything I make, including the website.</p>
+      <p class="price-note reveal">Every retainer begins with a trial month. Every month after is yours to cancel. You keep everything I make, the website included on Growth.</p>
     </div>
   </section>
 
@@ -1147,8 +1156,8 @@ ${P.crumb([{ name: "Home", href: "/" }, { name: "Contact" }])}
             <label for="cWant">What are you looking for?</label>
             <select id="cWant" name="looking_for">
               <option>Free audit</option>
-              <option>Presence retainer, $200 per month</option>
-              <option>Growth retainer, $400 per month</option>
+              <option>Presence retainer, $300 per month</option>
+              <option>Growth retainer, $500 per month</option>
               <option>Hourly project work</option>
               <option>Full time or internship</option>
               <option>Just exploring</option>
@@ -1284,7 +1293,7 @@ const pages = [
     file: "pricing/index.html",
     title: "Pricing, Pratim Narayan Moitra Tourism Marketing",
     description:
-      "Retainers from 200 USD a month, growth from 400 USD a month, and project work at an hourly rate. Every retainer starts with a trial month you can cancel.",
+      "Presence from 300 USD a month, Growth from 500 USD a month, and project work at an hourly rate. Every retainer starts with a trial month you can cancel.",
     breadcrumb: [{ name: "Home", href: "/" }, { name: "Pricing", href: "/pricing" }],
     body: pricing,
     extraSchema: [faqSchema]
@@ -1380,21 +1389,48 @@ Object.keys(CASES).forEach((slug) => {
    WRITE
    ============================================================ */
 
+/* ------------------------------------------------------------
+   Trailing slashes.
+
+   Netlify publishes every folder as its trailing slash URL and
+   301 redirects the bare path to it. /about was answering with a
+   redirect to /about/, while the canonical tag on /about/ pointed
+   back at /about. A canonical that resolves through a redirect is
+   how you end up with one page in Google and sixteen sitting in
+   "Page with redirect".
+
+   Rather than hand editing every href in this file, every internal
+   link is normalised here, once, on the rendered HTML. Anything
+   with a dot in it is a real file and is left alone.
+   ------------------------------------------------------------ */
+function slashInternalLinks(html) {
+  return html.replace(/href="(\/[^"#?]*)([#?][^"]*)?"/g, (m, pathPart, tail) => {
+    const rest = tail || "";
+    if (pathPart === "/") return m;            // home, and bare "#anchor" links
+    const last = pathPart.split("/").pop();
+    if (last.includes(".")) return m;          // /favicon.ico, /assets/styles.css
+    if (pathPart.endsWith("/")) return m;      // already correct
+    return `href="${pathPart}/${rest}"`;
+  });
+}
+
 function write() {
   pages.forEach((p) => {
-    const html = P.head(p) + P.nav(p.path) + p.body() + P.footer({ noModal: p.noModal });
+    const html = slashInternalLinks(
+      P.head(p) + P.nav(p.path) + p.body() + P.footer({ noModal: p.noModal })
+    );
     const out = path.join(ROOT, p.file);
     fs.mkdirSync(path.dirname(out), { recursive: true });
     fs.writeFileSync(out, html, "utf8");
     console.log("wrote", p.file);
   });
 
-  /* sitemap */
+  /* sitemap, in the same URL shape the server actually answers on */
   const today = new Date().toISOString().slice(0, 10);
   const urls = pages
     .map((p) => {
       const pri = p.path === "/" ? "1.0" : p.path.split("/").length > 2 ? "0.6" : "0.8";
-      return `  <url><loc>${SITE.origin}${p.path}</loc><lastmod>${today}</lastmod><changefreq>${
+      return `  <url><loc>${P.canonicalUrl(p.path)}</loc><lastmod>${today}</lastmod><changefreq>${
         p.path === "/" ? "weekly" : "monthly"
       }</changefreq><priority>${pri}</priority></url>`;
     })
