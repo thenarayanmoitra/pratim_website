@@ -1,0 +1,110 @@
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# The old multi page site, folded into the one page. Every URL that was
+# ever shared still lands somewhere sensible instead of a 404.
+# Repo files that are not part of the website are never served.
+[[redirects]]
+  from = "/netlify/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/README.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/netlify.toml"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/about/*"
+  to = "/#results"
+  status = 301
+
+[[redirects]]
+  from = "/why-work-with-me/*"
+  to = "/#problems"
+  status = 301
+
+[[redirects]]
+  from = "/services/*"
+  to = "/#how"
+  status = 301
+
+[[redirects]]
+  from = "/work/*"
+  to = "/#work"
+  status = 301
+
+[[redirects]]
+  from = "/pricing/*"
+  to = "/#questions"
+  status = 301
+
+[[redirects]]
+  from = "/audit/*"
+  to = "/#request"
+  status = 301
+
+[[redirects]]
+  from = "/contact/*"
+  to = "/#request"
+  status = 301
+
+[[redirects]]
+  from = "/work.html"
+  to = "/#work"
+  status = 301
+
+# short link for job outreach, pratimnarayan.com/cv lands on the CV form
+[[redirects]]
+  from = "/cv"
+  to = "/hire/#cv"
+  status = 301
+
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy/"
+  status = 301
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+
+# the hire page is for recruiters only, keep it out of search
+[[headers]]
+  for = "/hire/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, follow"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# styles.css and main.js are referenced with ?v=, bump it in index.html,
+# hire/index.html, privacy/index.html and 404.html whenever either changes
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# the CV and checklist, reachable only through the emailed link
+[[headers]]
+  for = "/files/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-cache"
