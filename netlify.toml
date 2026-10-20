@@ -1,0 +1,167 @@
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# One canonical host over HTTPS. The bare and www versions redirect.
+[[redirects]]
+  from = "https://www.pratimnarayan.com/*"
+  to = "https://pratimnarayan.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.pratimnarayan.com/*"
+  to = "https://pratimnarayan.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://pratimnarayan.com/*"
+  to = "https://pratimnarayan.com/:splat"
+  status = 301
+  force = true
+
+# Repo files that are not part of the website are never served.
+[[redirects]]
+  from = "/netlify/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/src/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/scripts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/build.js"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/README.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/netlify.toml"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# URLs from the old multi page site and the one page site. Real pages
+# are served first, these only catch addresses that no longer exist.
+[[redirects]]
+  from = "/about/*"
+  to = "/about/"
+  status = 301
+
+[[redirects]]
+  from = "/why-work-with-me/*"
+  to = "/#problems"
+  status = 301
+
+[[redirects]]
+  from = "/services/*"
+  to = "/services/social/"
+  status = 301
+
+[[redirects]]
+  from = "/work/*"
+  to = "/#results"
+  status = 301
+
+[[redirects]]
+  from = "/pricing/*"
+  to = "/#plans"
+  status = 301
+
+[[redirects]]
+  from = "/audit/*"
+  to = "/audit/"
+  status = 301
+
+[[redirects]]
+  from = "/contact/*"
+  to = "/#request"
+  status = 301
+
+[[redirects]]
+  from = "/work.html"
+  to = "/#work"
+  status = 301
+
+# short link for job outreach, pratimnarayan.com/cv lands on the CV form
+[[redirects]]
+  from = "/cv"
+  to = "/hire/#cv"
+  status = 301
+
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy/"
+  status = 301
+
+# links in the pages carry index.html so they work when opened from a folder.
+# On the live site these send every one of them to the clean folder URL.
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:a/index.html"
+  to = "/:a/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:a/:b/index.html"
+  to = "/:a/:b/"
+  status = 301
+  force = true
+
+# the hire page is for recruiters only, keep it out of search
+[[headers]]
+  for = "/hire/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, follow"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# styles.css and main.js are referenced with ?v=<hash>, which build.js
+# writes into every page, so returning visitors always get the new file
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+
+# the CV and checklist, reachable only through the emailed link
+[[headers]]
+  for = "/files/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-cache"

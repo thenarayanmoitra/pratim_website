@@ -1,0 +1,167 @@
+# pratimnarayan.com
+# Every crawler is welcome on the whole site, search engines and AI
+# assistants alike. Each one below is named from its vendor's documentation
+# so the allowance is explicit. A plain language summary for assistants is
+# at https://pratimnarayan.com/llms.txt and the full text at https://pratimnarayan.com/llms-full.txt
+
+# Google Search
+User-agent: Googlebot
+Allow: /
+Disallow: /404.html
+
+# Google Images
+User-agent: Googlebot-Image
+Allow: /
+Disallow: /404.html
+
+# Google, Gemini training and grounding
+User-agent: Google-Extended
+Allow: /
+Disallow: /404.html
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Disallow: /404.html
+
+# Apple, Siri and Spotlight
+User-agent: Applebot
+Allow: /
+Disallow: /404.html
+
+# Apple, foundation model training
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /404.html
+
+# OpenAI, model training
+User-agent: GPTBot
+Allow: /
+Disallow: /404.html
+
+# OpenAI, ChatGPT search
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /404.html
+
+# OpenAI, user requests
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /404.html
+
+# Anthropic, model training
+User-agent: ClaudeBot
+Allow: /
+Disallow: /404.html
+
+# Anthropic, search
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /404.html
+
+# Anthropic, user requests
+User-agent: Claude-User
+Allow: /
+Disallow: /404.html
+
+# Perplexity, search
+User-agent: PerplexityBot
+Allow: /
+Disallow: /404.html
+
+# Perplexity, user requests
+User-agent: Perplexity-User
+Allow: /
+Disallow: /404.html
+
+# Meta AI
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /404.html
+
+# Meta AI, user requests
+User-agent: Meta-ExternalFetcher
+Allow: /
+Disallow: /404.html
+
+# Facebook link previews
+User-agent: FacebookBot
+Allow: /
+Disallow: /404.html
+
+# LinkedIn link previews
+User-agent: LinkedInBot
+Allow: /
+Disallow: /404.html
+
+# X link previews
+User-agent: Twitterbot
+Allow: /
+Disallow: /404.html
+
+# WhatsApp link previews
+User-agent: WhatsApp
+Allow: /
+Disallow: /404.html
+
+# Slack link previews
+User-agent: Slackbot
+Allow: /
+Disallow: /404.html
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /404.html
+
+# DuckDuckGo AI answers
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /404.html
+
+# Yandex
+User-agent: YandexBot
+Allow: /
+Disallow: /404.html
+
+# Baidu
+User-agent: Baiduspider
+Allow: /
+Disallow: /404.html
+
+# Amazon, Alexa
+User-agent: Amazonbot
+Allow: /
+Disallow: /404.html
+
+# Common Crawl
+User-agent: CCBot
+Allow: /
+Disallow: /404.html
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+Disallow: /404.html
+
+# Mistral, user requests
+User-agent: MistralAI-User
+Allow: /
+Disallow: /404.html
+
+# You.com
+User-agent: YouBot
+Allow: /
+Disallow: /404.html
+
+# ByteDance
+User-agent: Bytespider
+Allow: /
+Disallow: /404.html
+
+# Everyone else
+User-agent: *
+Allow: /
+Disallow: /404.html
+
+Sitemap: https://pratimnarayan.com/sitemap.xml
