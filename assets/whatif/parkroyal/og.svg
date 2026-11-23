@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+<defs>
+<filter id="sh" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#000" flood-opacity=".3"/></filter>
+<filter id="sh2" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000" flood-opacity=".24"/></filter>
+</defs>
+<rect width="1200" height="630" fill="#FFFFFF"/>
+<foreignObject x="64" y="58" width="580" height="30"><div xmlns="http://www.w3.org/1999/xhtml" style="width:580px;height:30px;"><div style="display:flex;gap:28px;align-items:center;height:30px"><span style="font:600 18px/1 'Google Sans Flex', Arial, Helvetica, sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#666666;white-space:nowrap">Hotel or resort</span><span style="font:600 18px/1 'Google Sans Flex', Arial, Helvetica, sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#222222;white-space:nowrap">Episode 03</span></div></div></foreignObject>
+<g transform="rotate(-8 782 297.5)">
+<rect x="664" y="150" width="236" height="295" rx="4" fill="#FFFFFF" filter="url(#sh2)"/>
+<rect x="664" y="150" width="236" height="295" rx="4" fill="#FFFFFF" stroke="rgba(0,0,0,.1)"/>
+<defs><clipPath id="p8"><rect x="672" y="158" width="220" height="279"/></clipPath></defs><g clip-path="url(#p8)"><rect x="672" y="158" width="220" height="279" fill="#0B1117"/><image href="file:///Users/pratimnarayanmoitra/Desktop/Pratim Narayan/Apps/pratim_website-rebrand-v4/src/whatif-src/parkroyal.jpg" x="672" y="158" width="220" height="279" preserveAspectRatio="xMidYMid slice"/></g>
+<rect x="672" y="158" width="220" height="279" fill="none" stroke="rgba(0,0,0,.08)"/>
+<foreignObject x="684" y="170" width="196" height="31"><div xmlns="http://www.w3.org/1999/xhtml" style="width:196px;height:31px;"><span style="display:inline-block;font:600 12px/1 'Google Sans Flex', Arial, Helvetica, sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#FFFFFF;background:#222222;border-radius:4px;padding:7px 9px;white-space:nowrap">Before</span></div></foreignObject>
+</g>
+<g transform="rotate(4 1004 257.5)">
+<rect x="846" y="60" width="316" height="395" rx="4" fill="#FFFFFF" filter="url(#sh)"/>
+<rect x="846" y="60" width="316" height="395" rx="4" fill="#FFFFFF" stroke="rgba(0,0,0,.1)"/>
+<defs><clipPath id="p9"><rect x="854" y="68" width="300" height="379"/></clipPath></defs><g clip-path="url(#p9)"><rect x="854" y="68" width="300" height="379" fill="#0B1117"/><image href="file:///Users/pratimnarayanmoitra/Desktop/Pratim Narayan/Apps/pratim_website-rebrand-v4/src/whatif-src/parkroyal-remake.png" x="852.4" y="68.0" width="303.2" height="379.0" preserveAspectRatio="xMidYMid meet"/></g>
+<rect x="854" y="68" width="300" height="379" fill="none" stroke="rgba(0,0,0,.08)"/>
+
+</g>
+<foreignObject x="668" y="486" width="250" height="66"><div xmlns="http://www.w3.org/1999/xhtml" style="width:250px;height:66px;"><div style="font:700 54px/1 'Caveat Pen', 'Segoe Print', 'Bradley Hand', cursive;color:#CC0000;transform:rotate(-4deg);transform-origin:left bottom;white-space:nowrap">the remake</div></div></foreignObject>
+<path d="M880 520 Q 942 484.8, 960 476" fill="none" stroke="#CC0000" stroke-width="4" stroke-linecap="round"/><path d="M942.4 475.2 L960 476 L949.8 490.4" fill="none" stroke="#CC0000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<foreignObject x="64" y="140" width="580" height="380"><div xmlns="http://www.w3.org/1999/xhtml" style="width:580px;height:380px;"><div style="display:flex;flex-direction:column;justify-content:flex-end;height:380px"><div style="font:500 150px/.92 'Newsreader', Georgia, 'Times New Roman', serif;letter-spacing:-.025em;color:#222222"><span style="position:relative;display:inline-block;white-space:nowrap">What if<svg viewBox="0 0 300 14" preserveAspectRatio="none" fill="none" style="position:absolute;display:block;overflow:visible;left:-2%;bottom:-.1em;width:104%;height:.16em"><path d="M3 9C50 3 110 12 170 7S260 4 297 8" stroke="#CC0000" stroke-width="7" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></span></div><div style="margin-top:30px;font:500 42px/1.1 'Newsreader', Georgia, 'Times New Roman', serif;letter-spacing:-.015em;color:#444444">PARKROYAL posted like this?</div></div></div></foreignObject>
+<foreignObject x="64" y="552" width="1072" height="44"><div xmlns="http://www.w3.org/1999/xhtml" style="width:1072px;height:44px;"><div style="display:flex;justify-content:space-between;align-items:center;height:44px"><span style="font:italic 500 34px/1 'Newsreader', Georgia, 'Times New Roman', serif;color:#222222;letter-spacing:-.01em;white-space:nowrap">pratim n. moitra</span><span style="font:400 20px/1 'Google Sans Flex', Arial, Helvetica, sans-serif;color:#666666">pratimnarayan.com/whatif</span></div></div></foreignObject>
+</svg>
